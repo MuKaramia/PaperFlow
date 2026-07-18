@@ -6,6 +6,8 @@
 
 这个工作流适合需要长期保存原文、反复精读、跨文献积累概念，以及希望在 Codex 或 Claude Code 中用一句指令完成归档的人。
 
+[下载最新版 ZIP](https://github.com/MuKaramia/obsidian-literature-workflow/releases/latest/download/obsidian-literature-workflow.zip) · [查看安装方法](#安装-skill) · [查看完整工作流程](#工作流程)
+
 > 当前版本以 Obsidian 桌面端为目标。插件兼容修复基于 LLM Translator 0.3.5 与 PDF Annotator 0.2.0 测试。
 
 ## 演示
