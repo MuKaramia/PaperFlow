@@ -1,4 +1,4 @@
 interface:
-  display_name: "Obsidian Literature Workflow"
+  display_name: "PaperFlow｜文脉"
   short_description: "Archive, translate, annotate, and synthesize PDFs in Obsidian"
   default_prompt: "Use $obsidian-literature-workflow to archive this PDF and build a linked Obsidian reading package."

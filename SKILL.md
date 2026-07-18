@@ -3,7 +3,7 @@ name: obsidian-literature-workflow
 description: Archive academic PDFs into an Obsidian vault, preserve a vault-local original, produce a separate full Chinese translation and evidence-linked core analysis, create linked concept/theory/method/viewpoint notes, and collect PDF highlights plus user Notes into a per-paper close-reading note. Use when a user asks to import, translate, annotate, closely read, summarize, classify, or connect a PDF paper in Obsidian, or asks to install/configure the LLM Translator and PDF Annotator reading workflow for Codex or Claude Code.
 ---
 
-# Obsidian Literature Workflow
+# PaperFlow｜文脉
 
 Build a durable paper package in Obsidian. Keep the source PDF, full translation, analytical synthesis, and personal annotations separate but linked.
 

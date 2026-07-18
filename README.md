@@ -1,4 +1,4 @@
-# Obsidian Literature Workflow
+# PaperFlow｜文脉
 
 一套面向 **Codex** 与 **Claude Code** 的 Obsidian 学术文献精读 Skill。
 
