@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { bootstrapVault } from "./bootstrap_vault.mjs";
 
 function parseArgs(argv) {
   const result = {};
@@ -37,16 +38,24 @@ async function writeIfMissing(file, content) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help || !args.vault || !args.pdf) {
-    console.log("Usage: node archive_paper.mjs --vault /path/to/vault --pdf /path/paper.pdf [--key 'Author Year - Title'] [--library 05-文献原库]");
+    console.log("Usage: node archive_paper.mjs --vault /path/to/vault --pdf /path/paper.pdf [--key 'Author Year - Title'] [--library PaperFlow/05-文献原库]");
     return;
   }
   const vault = path.resolve(args.vault);
   const source = path.resolve(args.pdf);
   const key = safeName(args.key || path.basename(source));
-  const library = args.library || "05-文献原库";
-  const paperDir = path.join(vault, library, key);
+  const library = args.library || "PaperFlow/05-文献原库";
+  const libraryRoot = path.resolve(vault, library);
+  const relativeLibrary = path.relative(vault, libraryRoot);
+  if (path.isAbsolute(relativeLibrary) || relativeLibrary === ".." || relativeLibrary.startsWith(`..${path.sep}`)) {
+    throw new Error("--library must stay inside the Obsidian vault");
+  }
+  const paperDir = path.join(libraryRoot, key);
   const pdfName = `${key} - 原文.pdf`;
   const pdfTarget = path.join(paperDir, pdfName);
+  const vaultConfig = await fs.stat(path.join(vault, ".obsidian")).catch(() => null);
+  if (!vaultConfig?.isDirectory()) throw new Error(`Not an Obsidian vault: ${vault}`);
+  if (!args.library) await bootstrapVault(vault, { log: () => {} });
   await fs.mkdir(paperDir, { recursive: true });
 
   try {

@@ -1,19 +1,42 @@
 # Vault schema and writing contract
 
+## PaperFlow root
+
+Default managed layout:
+
+```text
+PaperFlow/
+├── PaperFlow 首页.md
+├── 01-学科领域/
+├── 02-跨领域概念/
+├── 03-理论与模型/
+├── 04-研究方法/
+├── 05-文献原库/
+├── 06-研究项目/
+├── 07-待处理/
+├── 90-规范与模板/
+└── 99-其他附件/
+```
+
+Recommend a dedicated Obsidian vault for the cleanest experience. In an existing vault, keep this whole tree under the single `PaperFlow/` namespace. Do not merge new PaperFlow materials into an existing classification unless the user explicitly chooses a custom mapping.
+
+Run `scripts/bootstrap_vault.mjs --vault <vault>` before the first import. It is idempotent and does not overwrite existing notes or templates. Never migrate an existing literature collection as a side effect of initialization.
+
 ## Paper package
 
 Default layout:
 
 ```text
-05-文献原库/
-└── Author Year - Short Title/
-    ├── Author Year - Short Title - 原文.pdf
-    ├── Author Year - Short Title - 核心解析.md
-    ├── Author Year - Short Title - 全文中文译稿.md
-    └── Author Year - Short Title - 精读笔记.md
+PaperFlow/
+└── 05-文献原库/
+    └── Author Year - Short Title/
+        ├── Author Year - Short Title - 原文.pdf
+        ├── Author Year - Short Title - 核心解析.md
+        ├── Author Year - Short Title - 全文中文译稿.md
+        └── Author Year - Short Title - 精读笔记.md
 ```
 
-Adapt the library root and metadata fields to an existing vault. Keep the four logical artifacts separate even when names differ.
+Keep the four logical artifacts separate. Change the library root only after an explicit user request.
 
 ## Durable PDF rule
 
@@ -48,7 +71,7 @@ Create an atomic note when an item is reusable across papers, not merely because
 - Related and contrasting notes
 - A backlink to the paper analysis
 
-Prefer the vault's existing disciplinary hierarchy. Update a nearby index note so the new paper is discoverable without relying on search.
+Route discipline-specific notes to `PaperFlow/01-学科领域`, cross-disciplinary concepts to `02-跨领域概念`, theories and models to `03-理论与模型`, and methods to `04-研究方法`. Update the nearest PaperFlow index note so the new paper is discoverable without relying on search.
 
 ## Full translation contract
 

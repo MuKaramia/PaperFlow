@@ -1,20 +1,59 @@
 ---
 name: obsidian-literature-workflow
-description: Archive academic PDFs into an Obsidian vault, preserve a vault-local original, produce a separate full Chinese translation and evidence-linked core analysis, create linked concept/theory/method/viewpoint notes, and collect PDF highlights plus user Notes into a per-paper close-reading note. Use when a user asks to import, translate, annotate, closely read, summarize, classify, or connect a PDF paper in Obsidian, or asks to install/configure the LLM Translator and PDF Annotator reading workflow for Codex or Claude Code.
+description: Initialize an isolated PaperFlow research library inside a selected Obsidian vault, archive academic PDFs with a vault-local original, produce separate full Chinese translations and evidence-linked core analyses, create linked concept/theory/method/viewpoint notes, and collect PDF highlights plus user Notes into per-paper close-reading notes. Use when a user asks to set up a clean Obsidian literature library, import or migrate PDFs, translate, annotate, closely read, summarize, classify, or connect papers, or install/configure the LLM Translator and PDF Annotator workflow for Codex or Claude Code.
 ---
 
 # PaperFlow｜文脉
 
-Build a durable paper package in Obsidian. Keep the source PDF, full translation, analytical synthesis, and personal annotations separate but linked.
+Build an isolated PaperFlow research library inside an Obsidian vault. Keep the source PDF, full translation, analytical synthesis, and personal annotations separate but linked.
 
 Resolve every bundled script and reference relative to the directory containing this `SKILL.md`; never assume the current working directory is the skill directory. Require Obsidian Desktop and Node.js 18 or newer for plugin setup.
 
 ## Establish the target
 
-1. Locate the Obsidian vault by finding `.obsidian/`.
-2. Identify the input PDF and the paper key, preferably `Author Year - Short Title`.
-3. Inspect the vault's existing folder and metadata conventions before adding files. Preserve them when they differ from the defaults in this skill.
-4. Never delete the downloaded source. Copy it into the vault and verify the copy before treating ingestion as complete.
+1. Recommend creating a dedicated empty Obsidian vault for PaperFlow when the user wants the cleanest setup. Ask the user to create or open it in Obsidian first so `.obsidian/` exists.
+2. When the user keeps an existing vault, isolate all managed content under one top-level `PaperFlow/` folder. Do not place new material into the user's pre-existing classifications by default.
+3. Locate the selected vault by finding `.obsidian/`. Never invent a vault path or initialize an arbitrary directory as a vault.
+4. Identify the input PDF and the paper key, preferably `Author Year - Short Title`.
+5. Never scan, reorganize, or migrate existing literature automatically. Import old literature only after an explicit user request, and copy rather than move it unless the user clearly requests otherwise.
+6. Never delete the downloaded source. Copy it into the vault and verify the copy before treating ingestion as complete.
+
+## Initialize the PaperFlow library
+
+On first use with a selected vault, run:
+
+```bash
+node "/absolute/path/to/obsidian-literature-workflow/scripts/bootstrap_vault.mjs" \
+  --vault "/absolute/path/to/vault"
+```
+
+This creates an idempotent, isolated structure:
+
+```text
+PaperFlow/
+├── 01-学科领域/
+├── 02-跨领域概念/
+├── 03-理论与模型/
+├── 04-研究方法/
+├── 05-文献原库/
+├── 06-研究项目/
+├── 07-待处理/
+├── 90-规范与模板/
+└── 99-其他附件/
+```
+
+The initializer also adds `PaperFlow 首页.md`, one index note per area, and editable copies of the three paper templates. It creates missing items and keeps existing files unchanged. Run it before archiving the first PDF, and rerun safely when repairing an incomplete structure.
+
+Use the folders consistently:
+
+- Put discipline-specific notes and indexes in `01-学科领域`.
+- Put genuinely cross-disciplinary concepts in `02-跨领域概念`.
+- Put reusable theories, models, mechanisms, and boundary conditions in `03-理论与模型`.
+- Put research designs, measurements, and analytical methods in `04-研究方法`.
+- Put every processed paper package in `05-文献原库`.
+- Put question-led collections and active studies in `06-研究项目`.
+- Put unprocessed PDFs and unresolved items in `07-待处理`.
+- Keep conventions and templates in `90-规范与模板`, and miscellaneous attachments in `99-其他附件`.
 
 ## Configure the reading tools
 
@@ -45,14 +84,14 @@ node "/absolute/path/to/obsidian-literature-workflow/scripts/archive_paper.mjs" 
   --key "Author Year - Short Title"
 ```
 
-This creates a paper folder, copies the PDF as `- 原文.pdf`, and creates separate analysis, translation, and close-reading notes without overwriting existing work. Follow [references/vault-schema.md](references/vault-schema.md) for naming and linking.
+This creates the paper folder under `PaperFlow/05-文献原库`, copies the PDF as `- 原文.pdf`, and creates separate analysis, translation, and close-reading notes without overwriting existing work. Use `--library` only when the user explicitly requests a different location. Follow [references/vault-schema.md](references/vault-schema.md) for naming and linking.
 
 ## Read and synthesize the paper
 
 1. Extract bibliographic metadata and readable text. Use OCR when the PDF lacks a text layer.
 2. Read the entire paper before finalizing claims. Distinguish author claims, reported evidence, and your inference.
 3. Write `核心解析.md` using the supplied headings. Add page references for claims, definitions, methods, results, limitations, and reusable quotations.
-4. Create or update atomic notes only for concepts, theories, mechanisms, methods, and viewpoints that materially help retrieval. Link each note back to the paper and link the paper analysis to the relevant domain index.
+4. Create or update atomic notes only for concepts, theories, mechanisms, methods, and viewpoints that materially help retrieval. Route them to the corresponding PaperFlow area, link each note back to the paper, and link the paper analysis to the relevant domain index.
 5. Do not fabricate metadata, results, quotations, or page numbers. Mark uncertain extraction explicitly.
 
 ## Produce the full Chinese translation
@@ -83,7 +122,7 @@ To collect the current annotations into the paper's close-reading note, run:
 ```bash
 node "/absolute/path/to/obsidian-literature-workflow/scripts/sync_annotations.mjs" \
   --vault "/absolute/path/to/vault" \
-  --pdf "05-文献原库/Author Year - Short Title/Author Year - Short Title - 原文.pdf"
+  --pdf "PaperFlow/05-文献原库/Author Year - Short Title/Author Year - Short Title - 原文.pdf"
 ```
 
 The managed section contains only the original excerpt, the user's Note, and a page link. Never insert the temporary Chinese selection translation there. Preserve any manual prose outside the managed markers.
@@ -93,6 +132,8 @@ The managed section contains only the original excerpt, the user's Note, and a p
 Confirm all of the following:
 
 - The vault-local PDF opens after the original download is moved or deleted.
+- `PaperFlow/` contains the complete `01` through `99` managed structure and `PaperFlow 首页.md`.
+- New paper packages are under `PaperFlow/05-文献原库`, not mixed into pre-existing vault classifications.
 - `核心解析.md`, `全文中文译稿.md`, and `精读笔记.md` are separate and mutually linked.
 - Analysis claims and quotations include usable source locations.
 - LLM Translator can translate a selection and its popup can move.
