@@ -1,14 +1,14 @@
 # PaperFlow｜文脉
 
-一套面向 **Codex** 与 **Claude Code** 的 Obsidian 学术文献精读 Skill。
+一套面向 **Codex、Claude Code、Kimi Code 与腾讯 WorkBuddy** 的 Obsidian 学术文献精读 Skill。
 
 把 PDF 交给 AI 后，它会将原文复制进 Obsidian 仓库，建立独立的全文中文译稿、核心解析和精读笔记，并把具有复用价值的概念、理论、方法和观点连接到现有知识体系。阅读阶段配合两个 Obsidian 插件，可以完成划词翻译、可删除的持久高亮、页级批注和 Note 汇总。
 
-这个工作流适合需要长期保存原文、反复精读、跨文献积累概念，以及希望在 Codex 或 Claude Code 中用一句指令完成归档的人。
+这个工作流适合需要长期保存原文、反复精读、跨文献积累概念，以及希望用一句指令完成归档的人。四个平台共用同一套文献目录、笔记模板和验收标准，迁移平台时不需要重建 Obsidian 库。
 
 > **推荐做法：为 PaperFlow 单独新建一个 Obsidian vault。** 这样文献原文、概念、理论、方法和研究项目从一开始就处在统一结构中。如果希望继续使用原来的 vault，首次运行也只会建立一个独立的 `PaperFlow/` 根目录，不会把新文献混入旧分类。已有文献不会自动迁移，需要用户明确要求智能体导入。
 
-[下载最新版 ZIP](https://github.com/MuKaramia/PaperFlow/releases/latest/download/obsidian-literature-workflow.zip) · [查看安装方法](#安装-skill) · [查看完整工作流程](#工作流程)
+[通用版 ZIP](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-universal.zip) · [Kimi Code 版](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-kimi-code.zip) · [WorkBuddy 上传版](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-workbuddy.zip) · [查看安装方法](#安装-skill)
 
 > 当前版本以 Obsidian 桌面端为目标。插件兼容修复基于 LLM Translator 0.3.5 与 PDF Annotator 0.2.0 测试。
 
@@ -106,16 +106,25 @@ flowchart LR
 使用前需要：
 
 - Obsidian Desktop。移动端不支持这里的插件安装和兼容补丁流程。
-- Codex 或 Claude Code，并允许其读取 PDF、写入 Obsidian vault 和运行本地命令。
+- Codex、Claude Code、Kimi Code 或 WorkBuddy Desktop，并允许其读取 PDF、写入指定的 Obsidian vault 和运行本地命令。
 - Node.js 18 或更新版本。
 - 第一次安装插件时需要联网。
 - 对 Obsidian 社区插件有基本的信任判断。敏感文献建议先查看插件源码及所选翻译服务的数据政策。
 
+| 平台 | 完整流程 | 安装方式 | 说明 |
+|---|---|---|---|
+| Codex | 支持 | 放入 `~/.codex/skills/` | 需授权读写 vault 与运行 Node.js |
+| Claude Code | 支持 | 放入 `~/.claude/skills/` | 可使用用户级或项目级 Skill |
+| Kimi Code | 支持 | 放入 `~/.kimi-code/skills/` 或 `~/.agents/skills/` | 普通 Kimi 网页和手机对话不等同于 Kimi Code |
+| WorkBuddy Desktop | 支持 | 在 Skills 页面上传 WorkBuddy 版 ZIP | 建议同时安装 SkillHub 中的官方 Obsidian Skill |
+
+> Kimi Code 与 WorkBuddy 版已完成 Skill 结构、路径、权限边界、调用方式和本地预检的适配。首次使用时建议先在空白测试 vault 中完成一篇 PDF 的端到端验收，再连接正式文献库。
+
 ## 安装 Skill
 
-### 方法一：下载 ZIP 后交给 Codex 或 Claude Code
+### 方法一：下载通用 ZIP 后交给 Codex 或 Claude Code
 
-1. 在本仓库右上方选择 **Code → Download ZIP**。
+1. 下载 [paperflow-universal.zip](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-universal.zip)。
 2. 把 ZIP 拖进 Codex 或 Claude Code 对话框。
 3. 输入：
 
@@ -153,6 +162,47 @@ AI 应当把完整文件夹放到对应的 Skills 目录，而不是只读取一
 项目目录/.claude/skills/obsidian-literature-workflow/
 ```
 
+### 方法四：安装到 Kimi Code
+
+下载 [paperflow-kimi-code.zip](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-kimi-code.zip)，解压后将完整文件夹放到任一位置：
+
+```text
+~/.kimi-code/skills/obsidian-literature-workflow/
+~/.agents/skills/obsidian-literature-workflow/
+```
+
+重新启动 Kimi Code 会话，输入：
+
+```text
+/skill:obsidian-literature-workflow
+```
+
+也可以用额外目录启动：
+
+```bash
+kimi --skills-dir "/absolute/path/to/skills"
+```
+
+请使用 Kimi Code 执行完整归档、插件安装和批注同步。普通 Kimi 网页端或手机端可以分析上传的 PDF，但不应假定它能直接读写本地 Obsidian 库。
+
+参考：[Kimi Code Agent Skills 官方文档](https://www.kimi.com/code/docs/en/kimi-code-cli/customization/skills.html)
+
+### 方法五：安装到腾讯 WorkBuddy
+
+1. 下载 [paperflow-workbuddy.zip](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-workbuddy.zip)，不要再次套入外层文件夹。
+2. 在 WorkBuddy Desktop 打开 **Skills → Add Skill（添加技能）→ Upload Skill（上传技能）**。
+3. 上传 ZIP，启用 `obsidian-literature-workflow`，然后新建一个任务。
+4. 将 Obsidian vault 选为工作目录，或单独授权 WorkBuddy 访问该目录。
+5. 在 SkillHub 中安装官方 `obsidian` Skill。它负责更顺畅的 vault 读写，PaperFlow 负责文献结构和精读流程，两者可以同时启用。
+
+参考：[WorkBuddy 技能导入](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market) · [WorkBuddy Obsidian Skill](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/WorkBuddy-Zero-Cost-Skill-Top-10/Obsidian)
+
+调用示例：
+
+```text
+请使用 obsidian-literature-workflow。我的 Obsidian vault 是 /path/to/vault，请先运行环境预检，然后初始化独立的 PaperFlow 文献库。
+```
+
 最终同样要确保 `SKILL.md` 直接位于 Skill 顶层。常见的错误是多套了一层同名目录：
 
 ```text
@@ -164,6 +214,18 @@ skills/obsidian-literature-workflow/obsidian-literature-workflow/SKILL.md
 ```
 
 安装 Skill 本身不会立即修改 Obsidian，因为它还不知道用户要使用哪个 vault。第一次指定 vault 并调用 PaperFlow 时，AI 会先建立隔离目录；社区插件仍然只在用户同意后安装。
+
+### 安装后预检
+
+在第一次修改 vault 前，四个平台都应运行同一个只读检查：
+
+```bash
+node "/absolute/path/to/obsidian-literature-workflow/scripts/preflight.mjs" \
+  --host auto \
+  --vault "/absolute/path/to/vault"
+```
+
+它会检查当前系统、Node.js 版本、Skill 资源完整性、`.obsidian/` 以及 vault 写入权限，不会创建或修改笔记。自动识别不出平台时，将 `auto` 换成 `codex`、`claude`、`kimi` 或 `workbuddy`。
 
 ## 第一次使用
 
@@ -483,6 +545,20 @@ node "/absolute/path/to/obsidian-literature-workflow/scripts/setup_plugins.mjs" 
 ~/.claude/skills/obsidian-literature-workflow/
 ```
 
+Kimi Code 用户删除：
+
+```text
+~/.kimi-code/skills/obsidian-literature-workflow/
+```
+
+如果安装在通用目录，则删除：
+
+```text
+~/.agents/skills/obsidian-literature-workflow/
+```
+
+WorkBuddy 用户在 **Skills → Installed（已安装）** 中停用或卸载 `obsidian-literature-workflow`。
+
 这不会删除已经归档到 Obsidian 的 PDF、译稿、核心解析和精读笔记。若不再需要两个社区插件，可以在 Obsidian 的“第三方插件”页面中停用或卸载。
 
 ## 仓库结构
@@ -501,8 +577,10 @@ obsidian-literature-workflow/
 │   └── reading-notes-template.md
 ├── references/
 │   ├── plugin-workflow.md
+│   ├── platforms.md
 │   └── vault-schema.md
 └── scripts/
+    ├── preflight.mjs
     ├── bootstrap_vault.mjs
     ├── setup_plugins.mjs
     ├── archive_paper.mjs

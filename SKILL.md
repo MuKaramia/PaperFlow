@@ -1,6 +1,6 @@
 ---
 name: obsidian-literature-workflow
-description: Initialize an isolated PaperFlow research library inside a selected Obsidian vault, archive academic PDFs with a vault-local original, produce separate full Chinese translations and evidence-linked core analyses, create linked concept/theory/method/viewpoint notes, and collect PDF highlights plus user Notes into per-paper close-reading notes. Use when a user asks to set up a clean Obsidian literature library, import or migrate PDFs, translate, annotate, closely read, summarize, classify, or connect papers, or install/configure the LLM Translator and PDF Annotator workflow for Codex or Claude Code.
+description: Initialize an isolated PaperFlow research library inside a selected Obsidian vault, archive academic PDFs with a vault-local original, produce separate full Chinese translations and evidence-linked core analyses, create linked concept/theory/method/viewpoint notes, and collect PDF highlights plus user Notes into per-paper close-reading notes. Use with Codex, Claude Code, Kimi Code, or WorkBuddy when a user asks to set up a clean Obsidian literature library, import or migrate PDFs, translate, annotate, closely read, summarize, classify, connect papers, or install and configure the LLM Translator and PDF Annotator workflow.
 ---
 
 # PaperFlow｜文脉
@@ -8,6 +8,24 @@ description: Initialize an isolated PaperFlow research library inside a selected
 Build an isolated PaperFlow research library inside an Obsidian vault. Keep the source PDF, full translation, analytical synthesis, and personal annotations separate but linked.
 
 Resolve every bundled script and reference relative to the directory containing this `SKILL.md`; never assume the current working directory is the skill directory. Require Obsidian Desktop and Node.js 18 or newer for plugin setup.
+
+## Adapt to the host
+
+1. Identify whether the current host is Codex, Claude Code, Kimi Code, or WorkBuddy without changing the research workflow.
+2. Read [references/platforms.md](references/platforms.md) during installation, first use, permission troubleshooting, or any Kimi Code or WorkBuddy session.
+3. Use Kimi Code instead of ordinary Kimi web or mobile chat when the task requires local vault access or scripts.
+4. In WorkBuddy Desktop, use an uploaded Skill package, select or authorize the vault as a working folder, and use its official Obsidian Skill as a complementary connector when available.
+5. Keep access scoped to the selected vault, input PDF, this Skill folder, and the network destinations needed for an explicitly approved plugin installation.
+
+Before changing the vault on first use, run the read-only check:
+
+```bash
+node "/absolute/path/to/obsidian-literature-workflow/scripts/preflight.mjs" \
+  --host auto \
+  --vault "/absolute/path/to/vault"
+```
+
+If host detection returns `unknown`, rerun with `--host codex`, `claude`, `kimi`, or `workbuddy`. Stop and explain any failed requirement rather than bypassing it.
 
 ## Establish the target
 
