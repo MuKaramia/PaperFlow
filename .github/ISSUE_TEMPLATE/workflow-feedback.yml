@@ -1,0 +1,50 @@
+name: 使用体验与工作流建议
+description: 分享一个真实使用情境，帮助 PaperFlow 改进
+title: "[体验] "
+labels:
+  - workflow-feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        PaperFlow 面向不同学科和研究阶段。这里欢迎具体、诚实的体验，包括顺利的部分和卡住的地方。
+  - type: dropdown
+    id: skill
+    attributes:
+      label: 使用了哪个 Skill
+      options:
+        - PaperFlow Atlas
+        - PaperFlow Thread
+        - Atlas 与 Thread
+    validations:
+      required: true
+  - type: input
+    id: task
+    attributes:
+      label: 你想完成什么
+      placeholder: 精读一篇论文、整理文献综述、推进一个研究问题……
+    validations:
+      required: true
+  - type: textarea
+    id: useful
+    attributes:
+      label: 哪些部分对你有帮助
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: 哪一步不清楚或不顺畅
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 你希望它怎样变化
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我没有上传受版权保护的文献正文、私人笔记或其他敏感信息
+          required: true

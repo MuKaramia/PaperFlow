@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 使用交流与研究方法讨论
+    url: https://github.com/MuKaramia/PaperFlow/discussions
+    about: 提问、分享使用方式，或讨论怎样把阅读组织成论证
+  - name: 安装说明
+    url: https://github.com/MuKaramia/PaperFlow#安装-paperflow
+    about: 提交问题前请先查看完整安装与排错说明

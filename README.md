@@ -13,6 +13,18 @@
 
 Atlas 负责从 PDF 到知识网络，Thread 负责从知识网络到论证线。这个工作流适合需要长期保存原文、反复精读、跨文献积累概念，并希望进一步把分散材料组织成清晰论证脉络的研究者。
 
+## 你可以怎样使用 PaperFlow
+
+PaperFlow 不限定学科、研究阶段或写作任务。你可以只调用 Atlas 完成一篇文献的保存与精读，也可以在积累材料后调用 Thread，把不同来源中的概念、证据和分歧组织成一条可检查的论证线。
+
+- **读懂一篇文献**：保存 PDF 原文，分开生成全文译稿、核心解析和自己的精读笔记，随时沿页码返回证据。
+- **建立可持续使用的文献库**：把概念、理论、方法与观点连接到固定目录，逐渐形成跨文献的知识网络。
+- **准备文献综述或研究计划**：输入一个问题，或组合多个关键词，让 Thread 只基于库内材料梳理定义、条件、机制、分歧与证据空白。
+- **继续推进一个研究问题**：新文献先保持独立，等你明确决定后再加入既有论证，主文档更新前自动保留旧版。
+- **共同讨论和写作**：先确认观点、反例、结构与证据，再逐段起草。PaperFlow 会提供逻辑支持，也会指出仍需判断或补证的位置。
+
+如果你正第一次尝试系统读文献，可以从一篇 PDF 开始：先让 Atlas 帮你辨认研究问题、核心主张和证据，再用 Thread 练习把几篇文献连接起来。这个入口只是完整工作流的一种用法，之后可以继续扩展为长期知识库和研究项目。
+
 > **推荐做法：为 PaperFlow 单独新建一个 Obsidian vault。** 这样文献原文、概念、理论、方法和研究项目从一开始就处在统一结构中。如果希望继续使用原来的 vault，首次运行也只会建立一个独立的 `PaperFlow/` 根目录，不会把新文献混入旧分类。已有文献不会自动迁移，需要用户明确要求智能体导入。
 
 [通用插件 ZIP](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-universal.zip) · [Kimi Code 版](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-kimi-code.zip) · [WorkBuddy 上传版](https://github.com/MuKaramia/PaperFlow/releases/latest/download/paperflow-workbuddy.zip) · [查看安装方法](#安装-paperflow)
