@@ -1,4 +1,4 @@
-# PaperFlow
+# PaperFlow 文脉
 
 一套面向 **Codex、Claude Code、Kimi Code、腾讯 CodeBuddy 与 WorkBuddy** 的 Obsidian 研究工作流。一次安装包含两个可以独立调用、彼此衔接的 Skill：
 
