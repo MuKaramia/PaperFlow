@@ -14,7 +14,7 @@ Resolve scripts and references from the PaperFlow plugin root, two levels above 
 Accept either:
 
 - A natural-language research question.
-- One or more keywords separated by commas, slashes, or vertical bars, such as `文化内在价值 | 城市更新 | 政策文本`.
+- One or more keywords separated by commas, slashes, or vertical bars, such as `文化 | 共创 | 演出策划`.
 
 Clarify ambiguous terms only when different meanings would materially change retrieval. Translate the request internally into concepts, contexts, material types, relationships, and expected explanatory outcome. Do not expose a ritualized “first-principles” label; simply reason from definitions, evidence, assumptions, and constraints.
 
