@@ -1,0 +1,4 @@
+interface:
+  display_name: "PaperFlow Thread"
+  short_description: "Turn connected vault evidence into a coherent reasoning line"
+  default_prompt: "Use $paperflow-thread to trace this question through my existing PaperFlow library and build an evidence-linked linear argument with me."

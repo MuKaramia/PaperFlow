@@ -1,84 +1,103 @@
 # Platform adapters
 
-Use this reference when installing PaperFlow, resolving its location, or running it from Kimi Code or WorkBuddy. The research workflow and vault schema stay identical on every host.
+Use this reference when installing PaperFlow, locating its plugin root, or resolving platform-specific invocation. Keep the research workflow, evidence rules, and vault schema identical on every host.
 
 ## Shared requirements
 
 - Use Obsidian Desktop and an opened vault containing `.obsidian/`.
-- Use Node.js 18 or newer for the bundled scripts.
-- Give the agent access to the selected vault and the input PDF.
+- Use Node.js 18 or newer for bundled scripts.
+- Grant access only to the selected vault, input papers, and PaperFlow plugin directory.
 - Ask before installing community plugins or changing `.obsidian/`.
-- Resolve scripts relative to this Skill folder. Do not assume the chat workspace is the Skill folder.
+- Resolve scripts from the PaperFlow plugin root. From either Skill, move two levels upward from `SKILL.md`.
 
 Run the read-only preflight before first setup:
 
 ```bash
-node "/absolute/path/to/obsidian-literature-workflow/scripts/preflight.mjs" \
+node "/absolute/path/to/PaperFlow/scripts/preflight.mjs" \
   --host auto \
   --vault "/absolute/path/to/vault"
 ```
 
-Use `--host codex`, `claude`, `kimi`, or `workbuddy` when automatic detection is inconclusive.
+Use `--host codex`, `claude`, `kimi`, `codebuddy`, or `workbuddy` when automatic detection is inconclusive.
+
+## Plugin inventory
+
+The complete installation must preserve:
+
+```text
+PaperFlow/
+├── skills/paperflow-atlas/SKILL.md
+├── skills/paperflow-thread/SKILL.md
+├── scripts/
+├── assets/
+└── references/
+```
+
+Do not install only one `SKILL.md` without its shared resources.
 
 ## Codex
 
-User Skill location:
+Use the complete plugin root containing `.codex-plugin/plugin.json`. When installation is delegated through chat, ask Codex to install the ZIP as a persistent multi-Skill plugin and verify that both `paperflow-atlas` and `paperflow-thread` are discoverable.
 
-```text
-~/.codex/skills/obsidian-literature-workflow/
-```
-
-Ask Codex to use `obsidian-literature-workflow`, provide the vault path and PDF path, and approve writes inside the selected vault.
+Invoke by name in natural language or with `$paperflow-atlas` and `$paperflow-thread` when the client exposes Skill chips. Authorize only the selected vault and commands required by the chosen workflow.
 
 ## Claude Code
 
-User Skill location:
+Load the unpacked plugin during local use:
 
-```text
-~/.claude/skills/obsidian-literature-workflow/
+```bash
+claude --plugin-dir "/absolute/path/to/PaperFlow"
 ```
 
-A project-local installation may instead use `.claude/skills/obsidian-literature-workflow/`.
+Plugin Skills are namespaced:
+
+```text
+/paperflow:paperflow-atlas
+/paperflow:paperflow-thread
+```
+
+Run `/reload-plugins` after modifying or updating a local plugin. Keep `skills/` at the plugin root, not inside `.claude-plugin/`.
 
 ## Kimi Code
 
-Install the complete folder in either location:
+Install directly from GitHub:
 
 ```text
-~/.kimi-code/skills/obsidian-literature-workflow/
-~/.agents/skills/obsidian-literature-workflow/
+/plugins install https://github.com/MuKaramia/PaperFlow
 ```
 
-Alternatively start Kimi Code with an extra Skills parent directory:
+Or install the Kimi release ZIP or unpacked plugin directory. The root `kimi.plugin.json` points to both Skills. Run `/reload` or open a new session after installing. Invoke manually with:
+
+```text
+/skill:paperflow-atlas
+/skill:paperflow-thread
+```
+
+Ordinary Kimi web or mobile chat cannot be assumed to access a local Obsidian vault or run these scripts. Use Kimi Code for the complete workflow.
+
+## CodeBuddy and WorkBuddy
+
+For CodeBuddy Code, load the plugin root locally:
 
 ```bash
-kimi --skills-dir "/absolute/path/to/skills"
+codebuddy --plugin-dir "/absolute/path/to/PaperFlow"
 ```
 
-Start a new Kimi Code session after installation. Invoke manually with:
+Invoke namespaced Skills as `/paperflow:paperflow-atlas` and `/paperflow:paperflow-thread`, then run `/reload-plugins` after updates.
 
-```text
-/skill:obsidian-literature-workflow
-```
-
-Kimi's ordinary web or mobile chat can analyze an uploaded PDF but cannot be assumed to access a local Obsidian vault or run these scripts. Use Kimi Code for the complete workflow.
-
-## WorkBuddy
-
-Use WorkBuddy Desktop, not only the mobile or mini-program surface.
+For WorkBuddy Desktop:
 
 1. Open **Skills**, choose **Add Skill**, then **Upload Skill**.
-2. Upload the WorkBuddy release package whose archive root contains `SKILL.md`.
-3. Install WorkBuddy's official `obsidian` Skill from SkillHub when available. It is complementary: PaperFlow supplies the literature workflow, while the Obsidian Skill improves vault access and note operations.
-4. Create a task whose working directory is the selected Obsidian vault, or explicitly grant that vault as an accessible folder.
-5. Keep the default confirmation mode unless the user intentionally wants broader access. Approve the specific file and terminal operations PaperFlow needs.
-6. Ask WorkBuddy to use `obsidian-literature-workflow`, then provide the vault and PDF paths.
+2. Upload the WorkBuddy release ZIP whose archive root contains `.workbuddy-plugin/plugin.json`, `skills/`, and shared resources.
+3. Enable `paperflow` and start a new task.
+4. Select the Obsidian vault as the working directory or grant it as an accessible folder.
+5. Install WorkBuddy's official Obsidian capability when available. It complements PaperFlow's research workflow.
 
-If WorkBuddy imports the package but does not list it, confirm that `SKILL.md` is at the archive root, re-enable the Skill, and start a new task. If terminal execution is unavailable, WorkBuddy may still draft the notes, but it cannot safely initialize the library, install the plugins, archive the PDF, or synchronize annotations automatically.
+If terminal execution is unavailable, WorkBuddy may draft notes but cannot safely initialize the library, install plugins, archive PDFs, create verified snapshots, or synchronize annotations automatically.
 
-## Host-specific limitations
+## Host-specific limits
 
-- The selected model affects translation and synthesis quality; the host application does not remove the need to verify quotations, page numbers, tables, formulas, and OCR.
-- Network policy may block the first plugin download from GitHub. Retry only after confirming that the user permits the download.
-- WorkBuddy and Kimi Code may use different permission prompts, but neither should receive access to unrelated folders.
-- Do not silently fall back to an uploaded cloud copy when the user expects the original PDF and notes to remain local.
+- Model choice affects translation and synthesis quality. Always verify quotations, page numbers, tables, formulas, and OCR.
+- Network policy may block the first community-plugin download. Retry only after confirming user approval.
+- Permission prompts differ, but no host should receive access to unrelated folders.
+- Do not silently fall back to an uploaded cloud copy when the user expects the PDF and notes to remain local.

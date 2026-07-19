@@ -57,7 +57,7 @@ function indexContent(folder, title, description) {
 
 function homeContent(root) {
   const links = FOLDERS.map(([folder, note, description]) => `- [[${root}/${folder}/${note.replace(/\.md$/, "")}|${folder}]]：${description}`).join("\n");
-  return `---\ntype: paperflow-home\npaperflow_version: 1\n---\n\n# PaperFlow｜文脉\n\n从 PDF 原文出发，分开保存全文译稿、核心解析和个人精读笔记，再把可复用知识连接到学科、概念、理论、方法与研究项目。\n\n## 目录\n\n${links}\n\n## 使用原则\n\n- 新文献默认进入 [[${root}/05-文献原库/文献原库索引|05-文献原库]]。\n- 未处理材料可以先放入 [[${root}/07-待处理/待处理清单|07-待处理]]。\n- 旧文献不会自动迁移，只有明确要求导入时才会复制进 PaperFlow。\n- 原文、全文译稿、核心解析和精读笔记保持分离并相互链接。\n`;
+  return `---\ntype: paperflow-home\npaperflow_version: 2\n---\n\n# PaperFlow\n\n> **想和你一起，把问题慢慢想清楚。**\n>\n> PaperFlow 想陪你把散落的阅读、还没有成形的念头，以及那些一闪而过却很重要的问题，慢慢织成属于你自己的研究。它会认真听你怎么想，陪你寻找线索、讨论不同的可能，也会诚实提醒你哪里还需要证据。研究不必交给它完成，我们可以一起把它想清楚，再一段一段写出来。\n\nPaperFlow Atlas 从 PDF 原文出发，分开保存全文译稿、核心解析和个人精读笔记，再把可复用知识连接成地图。PaperFlow Thread 从研究问题出发，将库内的网状材料梳理成可检查、可修订的论证线。\n\n## 目录\n\n${links}\n\n## 使用原则\n\n- 新文献默认进入 [[${root}/05-文献原库/文献原库索引|05-文献原库]]。\n- 未处理材料可以先放入 [[${root}/07-待处理/待处理清单|07-待处理]]。\n- 旧文献不会自动迁移，只有明确要求导入时才会复制进 PaperFlow。\n- 原文、全文译稿、核心解析和精读笔记保持分离并相互链接。\n- 新文献不会自动改变已有推理，只有明确要求后才会整合。\n- 语气保持温和，判断保持客观，证据不足时直接说明。\n`;
 }
 
 async function assertVault(vault) {

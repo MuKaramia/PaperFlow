@@ -1,0 +1,28 @@
+{
+  "name": "paperflow",
+  "version": "2.0.0",
+  "description": "Turn academic PDFs into a connected Obsidian knowledge atlas, then weave vault evidence into transparent linear arguments.",
+  "author": {
+    "name": "Karamia",
+    "url": "https://github.com/MuKaramia"
+  },
+  "homepage": "https://github.com/MuKaramia/PaperFlow",
+  "repository": "https://github.com/MuKaramia/PaperFlow",
+  "license": "MIT",
+  "keywords": ["academic-research", "obsidian", "pdf", "literature-review", "knowledge-management"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PaperFlow",
+    "shortDescription": "From connected papers to coherent arguments",
+    "longDescription": "PaperFlow bundles Atlas for durable PDF archiving and networked literature notes with Thread for evidence-traceable, user-guided linear synthesis inside Obsidian.",
+    "developerName": "Karamia",
+    "category": "Productivity",
+    "websiteURL": "https://github.com/MuKaramia/PaperFlow",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": [
+      "Use PaperFlow Atlas to archive and connect this paper in my Obsidian vault.",
+      "Use PaperFlow Thread to trace this research question through my existing vault."
+    ],
+    "brandColor": "#91A99A"
+  }
+}

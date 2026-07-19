@@ -1,0 +1,13 @@
+{
+  "name": "paperflow",
+  "version": "2.0.0",
+  "description": "Connected literature archiving and user-guided linear synthesis for Obsidian.",
+  "author": {
+    "name": "Karamia"
+  },
+  "homepage": "https://github.com/MuKaramia/PaperFlow",
+  "repository": "https://github.com/MuKaramia/PaperFlow",
+  "license": "MIT",
+  "keywords": ["academic-research", "obsidian", "literature-review"],
+  "skills": "./skills/"
+}

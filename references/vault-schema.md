@@ -22,6 +22,18 @@ Recommend a dedicated Obsidian vault for the cleanest experience. In an existing
 
 Run `scripts/bootstrap_vault.mjs --vault <vault>` before the first import. It is idempotent and does not overwrite existing notes or templates. Never migrate an existing literature collection as a side effect of initialization.
 
+PaperFlow Thread stores each active question under `06-研究项目`:
+
+```text
+PaperFlow/06-研究项目/<研究问题>/
+├── 线性推理.md
+├── 待整合文献.md
+└── 版本记录/
+    └── 版本索引.md
+```
+
+Keep `线性推理.md` as the stable linked entry point. Copy its current state into `版本记录` before every user-approved integration. Never update it merely because Atlas archived a new paper.
+
 ## Paper package
 
 Default layout:
@@ -99,3 +111,7 @@ Keep manual synthesis outside these markers:
 generated annotations
 <!-- PDF-ANNOTATIONS:END -->
 ```
+
+## Thread boundary
+
+Treat the vault as the primary evidence boundary for a Thread synthesis. Label absent support as a library-level gap unless external literature has been separately searched and verified. Queue new papers only after user instruction or agreement, and integrate them only after an explicit request naming an unambiguous project and paper set.

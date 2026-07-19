@@ -1,0 +1,4 @@
+interface:
+  display_name: "PaperFlow Atlas"
+  short_description: "Turn papers into a connected Obsidian knowledge atlas"
+  default_prompt: "Use $paperflow-atlas to archive this PDF, preserve its original, and connect its evidence to my Obsidian knowledge atlas."

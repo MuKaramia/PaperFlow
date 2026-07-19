@@ -1,4 +1,4 @@
 interface:
-  display_name: "PaperFlow｜文脉"
-  short_description: "Build an isolated PDF-to-knowledge library in Obsidian"
-  default_prompt: "Use $obsidian-literature-workflow to initialize an isolated PaperFlow library in my Obsidian vault, then archive this PDF and build a linked reading package."
+  display_name: "PaperFlow Legacy"
+  short_description: "Compatibility entry for PaperFlow 1.x installations"
+  default_prompt: "Use $obsidian-literature-workflow to route this request to PaperFlow Atlas or PaperFlow Thread."

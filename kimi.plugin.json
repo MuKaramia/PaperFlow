@@ -1,0 +1,20 @@
+{
+  "name": "paperflow",
+  "version": "2.0.0",
+  "description": "Connected literature archiving and user-guided linear synthesis for Obsidian.",
+  "keywords": ["academic-research", "obsidian", "literature-review"],
+  "author": {
+    "name": "Karamia"
+  },
+  "homepage": "https://github.com/MuKaramia/PaperFlow",
+  "license": "MIT",
+  "skills": "./skills/",
+  "skillInstructions": "Use evidence from the user-selected Obsidian vault. Keep a warm tone while remaining independent, explicit about uncertainty, and critical of unsupported claims.",
+  "interface": {
+    "displayName": "PaperFlow",
+    "shortDescription": "From connected papers to coherent arguments",
+    "longDescription": "Atlas archives and connects papers; Thread turns the user's own knowledge base into a transparent, revisable argument.",
+    "developerName": "Karamia",
+    "websiteURL": "https://github.com/MuKaramia/PaperFlow"
+  }
+}
